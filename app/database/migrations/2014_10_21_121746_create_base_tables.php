@@ -66,6 +66,7 @@ class CreateBaseTables extends Migration {
 
 	public function down()
 	{
+        Schema::drop('comments');
         Schema::drop('upvotes');
         Schema::drop('posts');
         Schema::drop('profiles');
