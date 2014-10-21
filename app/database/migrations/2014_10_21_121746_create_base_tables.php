@@ -37,12 +37,37 @@ class CreateBaseTables extends Migration {
             $table->increments('id');
             $table->string('title');
             $table->string('url');
+            $table->integer('posted_by')->unsigned();
+            $table->foreign('posted_by')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('comments', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->text('body');
+            $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->integer('comment_by')->unsigned();
+            $table->foreign('comment_by')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('upvotes', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->integer('upvoted_by')->unsigned();
+            $table->foreign('upvoted_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 	}
 
 	public function down()
 	{
+        Schema::drop('upvotes');
+        Schema::drop('posts');
         Schema::drop('profiles');
 		Schema::drop('users');
 
