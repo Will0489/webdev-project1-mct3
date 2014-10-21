@@ -35,7 +35,8 @@ class CreateBaseTables extends Migration {
         Schema::create('posts', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->
+            $table->string('title');
+            $table->string('url');
             $table->timestamps();
         });
 	}
