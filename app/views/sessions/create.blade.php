@@ -6,9 +6,9 @@
 <div class="md-modal md-effect md-show" id="modal">
 	<div class="md-content">
 		{{ Form::open(['route' => 'sessions.store', 'class' => 'form-group']) }}
-			<h1>Sign In</h1>
+			<h1>Log in</h1>
 			<div class='btn fb big'>
-				<a href="/login/fb">Sign In with Facebook</a>
+				<a href="/login/fb">Log in with Facebook</a>
 			</div>
 			<div class="separator">
 				<span class="div-line" ></span><p class="divider xs">or</p><span class="div-line" ></span>
@@ -23,7 +23,7 @@
 			</div>
 
 			<div>
-				{{ Form::submit('Sign In', ['class' => 'btn red xxl']) }}
+				{{ Form::submit('Log in', ['class' => 'btn red xxl']) }}
 			</div>
 			<div>
 				@if($errors->any())
@@ -33,7 +33,7 @@
 			</div>
 			<br/>
 		{{ Form::close() }}
-		<p class='xs'>Need an account? <a href="signup" class="link">Sign Up</a></p>
+		<p class='xs'>Don't have an account yet? <a href="signup" class="link">Register</a> here.</p>
 	</div>
 </div>
 @stop
