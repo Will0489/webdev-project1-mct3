@@ -8,12 +8,7 @@ Route::resource('upvote', 'UpvoteController');
 
 Route::get('/', function()
 {
-    $data = array();
-
-    if (Auth::check()) {
-        $data = Auth::user();
-    }
-    return View::make('pages.home', array('data'=>$data));
+    return View::make('pages.home');
 });
 
 Route::get('login', 'SessionController@create');
@@ -22,13 +17,15 @@ Route::get('logout', function() {
     return Redirect::to('/')->with('message', 'You have been logged out.');
 
 });
-Route::get('register', 'UserController@create')->before('guest');
+Route::get('register', 'UserController@create');
 Route::post('register', 'UserController@store');
-Route::get('news', 'PostController@home');
-Route::get('news/{id}', 'PostController@detail');
-Route::get('comments', 'CommentController@home');
-Route::post('comments/new', 'CommentController@create');
-Route::get('submit', 'PostController@create')->before('auth');
+Route::get('profile', 'UserController@profile');
+Route::get('profile/{id?}', 'UserController@show');
+Route::get('news', 'PostController@index');
+Route::get('news/{id?}', 'PostController@show');
+Route::get('comments', 'CommentController@index');
+Route::get('submit', 'PostController@create');
+Route::post('submit', 'PostController@store');
 
 // Facebook routes
 Route::get('login/fb', function() {

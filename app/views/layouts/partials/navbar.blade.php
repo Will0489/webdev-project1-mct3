@@ -1,19 +1,20 @@
  <header>
  	<nav>
  		<a href="/" class="logo left">Newsfeedr</a>
- 		@if(Auth::check())
  		<ul class="left">
- 			<li><a href="submit" class="btn small red">Submit an article!</a></li>
- 		</ul>
+ 		@if(Auth::check())
+ 			<li><a href="/submit">Submit</a></li>
+ 		@else
+ 		    <li><a href="/register">Submit</a></li>
  		@endif
+ 		</ul>
  		<ul>
 	 		@if(Auth::check())
-	 		<li><a href="profile" class="btn small" alt="your profile"><img src="{{ $data['photo']}}" class="icon avatar"/>{{ $data['username'] }}</a></li>
-	 		<li><a href="settings" alt="settings"><img src="/assets/icons/icon-settings.png" class="icon"/></a></li>
-	 		<li><a href="logout"  alt="sign out"><img src="/assets/icons/icon-logout.png" class="icon"/></a></li>
+                <li><a href="/profile" alt="your profile"><img src="{{ Auth::user()->photo}}" class="icon avatar"/>{{ Auth::user()->username }}</a></li>
+                <li><a href="/logout"  alt="sign out">Log out</a></li>
 	 		@else
-	 		<li><a href="login" class="btn small">Sign In</a></li>
-	 		<li><a href="register" class="btn small red">Sign Up</a></li>
+                <li><a href="/login" alt="login">Log in</a></li>
+                <li><a href="/register" alt="register">Register</a></li>
  			@endif
  		</ul>
  	</nav>

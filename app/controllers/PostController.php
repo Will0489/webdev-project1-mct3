@@ -21,7 +21,7 @@ class PostController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('posts.submit');
 	}
 
 	/**
@@ -31,9 +31,14 @@ class PostController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		//
-	}
+    {
+        $data = Input::all();
+        $post = new Post($data);
+        $post->posted_by = Auth::id();
+        $post->save();
+
+        return Redirect::to('/news/{' . $post->id . '}');
+    }
 
 	/**
 	 * Display the specified resource.
@@ -44,7 +49,14 @@ class PostController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $post = Post::find($id);
+
+        return View::make('posts.detail', array('post' => $post));
+
+        /*else
+        {
+            return View::make('errors.404', $id);
+        }*/
 	}
 
 	/**

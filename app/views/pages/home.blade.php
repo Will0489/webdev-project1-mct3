@@ -1,17 +1,36 @@
 @extends('layouts.default')
 
 @section('content')
-    <img src="assets/images/header.gif" class="cover image"/>
-    <div class="section group" id="welcome">
-    </div>
-    <div class="section">
-    </div>
-    <div class="section">
-        <div class="col span_1_of_3 qHeading">
-            <h2 class="qHeading">Latest Questions</h2>
-        </div>
-         <div class="col span_2_of_3">
-            <p class='xs right'><a href="login">Explore All</a></p>
-        </div>
+    <div>
+        <h1>Latest news</h1>
+        <table>
+            <tr>
+                <td>1.</td>
+                <td><a href="#">Test news about something interesting</a></td>
+                <td>Posted today at</td>
+                <td>by <a href="#">User</a></td>
+                <td><a href="#">Comments</a></td>
+                <td><a href="#">Upvote</a></td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td><a href="#">Test news about something interesting</a></td>
+                <td>Posted today at</td>
+                <td>by <a href="#">User</a></td>
+                <td><a href="#">Comments</a></td>
+                <td><a href="#">Upvote</a></td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td><a href="#">Test news about something interesting</a></td>
+                <td>Posted today at</td>
+                <td>by <a href="#">User</a></td>
+                <td><a href="#">Comments</a></td>
+                <td><a href="#">Upvote</a></td>
+                <td>12</td>
+            </tr>
+        </table>
     </div>
 @stop

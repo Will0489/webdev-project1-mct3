@@ -44,11 +44,13 @@ class UserController extends \BaseController {
 	public function store()
 	{
         $data = Input::only(['username','email','photo','password']);
+
+        // Image validation and storage
         if(Input::hasFile('photo'))
         {
             $file = Input::file('photo');
-            $filename = $file->getClientOriginalName();
-            $destpath = 'images/'.str_random(8).'/';
+            $filename = 'avatar.jpg';
+            $destpath = 'images/'.str_random(16).'/';
 
             $file->move($destpath, $filename);
             $data['photo'] = $destpath . $filename;
@@ -74,7 +76,9 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::find($id);
+
+        return View::make('users.detail', array('user' => $user));
 	}
 
 	/**

@@ -32,7 +32,12 @@ class CommentController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $data = Input::all();
+        $comment = new Comment($data);
+        $comment->posted_by = Auth::id();
+        $comment->save();
+
+        return Redirect::to('/news/{' . $data->id . '}')->with('message', 'Your comment has been added.');
 	}
 
 	/**
