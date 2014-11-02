@@ -6,7 +6,10 @@ Route::resource('post', 'PostController');
 Route::resource('comment', 'CommentController');
 Route::resource('upvote', 'UpvoteController');
 
-Route::get('/', 'PostController@index');
+Route::get('/', function()
+{
+    return Redirect::to('http://newsfeedr.herokuapp.com');
+});
 
 Route::get('login', 'SessionController@create');
 Route::get('logout', 'SessionController@destroy');
