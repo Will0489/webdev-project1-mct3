@@ -38,6 +38,7 @@ class CreateBaseTables extends Migration {
             $table->increments('id');
             $table->string('title');
             $table->string('url');
+            $table->integer('upvotes');
             $table->integer('posted_by')->unsigned();
             $table->foreign('posted_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

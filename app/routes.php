@@ -6,17 +6,11 @@ Route::resource('post', 'PostController');
 Route::resource('comment', 'CommentController');
 Route::resource('upvote', 'UpvoteController');
 
-Route::get('/', function()
-{
-    return View::make('pages.home');
-});
+Route::get('/', 'PostController@index');
 
 Route::get('login', 'SessionController@create');
-Route::get('logout', function() {
-    Auth::logout();
-    return Redirect::to('/')->with('message', 'You have been logged out.');
+Route::get('logout', 'SessionController@destroy');
 
-});
 Route::get('register', 'UserController@create');
 Route::post('register', 'UserController@store');
 Route::get('profile', 'UserController@profile');

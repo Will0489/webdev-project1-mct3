@@ -5,7 +5,7 @@
  		@if(Auth::check())
  			<li><a href="/submit">Submit</a></li>
  		@else
- 		    <li><a href="/register">Submit</a></li>
+ 		    <li><a href="/login">Submit</a></li>
  		@endif
  		</ul>
  		<ul>

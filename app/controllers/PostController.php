@@ -2,97 +2,52 @@
 
 class PostController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /post
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
-		//
+		$posts = Post::orderBy('created_at', 'desc')->get();
+
+        return View::make('posts.index', compact('posts'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /post/create
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
 		return View::make('posts.submit');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /post
-	 *
-	 * @return Response
-	 */
 	public function store()
     {
         $data = Input::all();
-        $post = new Post($data);
-        $post->posted_by = Auth::id();
-        $post->save();
+        $user = Auth::id();
 
-        return Redirect::to('/news/{' . $post->id . '}');
+        $rules = ['title' => 'required', 'url' => 'required'];
+        $feedback = [
+            'title.required' => 'You need to enter a title.',
+            'url.required' => 'You need to enter a url.'];
+
+        $validator = Validator::make(Input::all(), $rules, $feedback);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            Post::create([
+                'title' => $data['title'],
+                'url' => $data['url'],
+                'posted_by' => $user
+            ]);
+        }
+        return Redirect::route('/news');
+
     }
 
-	/**
-	 * Display the specified resource.
-	 * GET /post/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
-        $post = Post::find($id);
+        $post = Post::with('user')->findOrFail($id);
+        $user = User::with('posts');
+        $upvote = Upvote::with('posts');
 
-        return View::make('posts.detail', array('post' => $post));
-
-        /*else
-        {
-            return View::make('errors.404', $id);
-        }*/
+        return View::make('posts.detail', compact('post', 'user', 'upvote'));
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /post/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /post/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /post/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

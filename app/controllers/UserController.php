@@ -2,17 +2,6 @@
 
 class UserController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /user
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
     public function profile()
     {
         if(Auth::check())
@@ -20,27 +9,15 @@ class UserController extends \BaseController {
             $data = Auth::user();
             return View::make('users.profile', array('data' => $data));
         } else {
-            return View::make('error.guest');
+            return Redirect::to('login');
         }
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /user/create
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
 		return View::make('users.register');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /user
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
         $data = Input::only(['username','email','photo','password']);
@@ -67,13 +44,6 @@ class UserController extends \BaseController {
         return Redirect::back()->withInput()->withErrors(['Failed to register.']);
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /user/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		$user = User::find($id);
@@ -81,40 +51,39 @@ class UserController extends \BaseController {
         return View::make('users.detail', array('user' => $user));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /user/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
-		//
+		$user = User::whereID($id)->firstOrFail();
+
+        return View::make('users.edit')->withUser($user);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /user/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
-		//
+		$user = User::whereID($id)->firstOrFail();
+        $data = Input::only('about', 'facebook', 'twitter', 'location', 'photo');
+
+        // Image validation and storage
+        if(Input::hasFile('photo'))
+        {
+            $file = Input::file('photo');
+            $filename = 'avatar.jpg';
+            $destpath = 'images/'.str_random(16).'/';
+
+            $file->move($destpath, $filename);
+            $data['photo'] = $destpath . $filename;
+        } else {
+            $data['photo'] = $user->photo;
+        }
+
+        $user->fill($data)->save();
+
+        return Redirect::to('profile/{$user->id}');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /user/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
-		//
+		//TODO: Soft deleting of users
 	}
 
 }

@@ -6,9 +6,6 @@
         {{ Form::open(['route' => 'user.store', 'method' => 'post', 'files' => true]) }}
         <h1>Sign Up</h1>
             <div>
-                <a href="/login/fb">Sign up with Facebook</a><br><br>
-            </div>
-            <div>
                 {{ Form::text('username', null, ['placeholder' => 'Username', 'class' => 'input', 'required' => 'required']) }}
             </div>
             <div>
