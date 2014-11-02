@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="/" class="navbar-brand">Newsfeedr</a>
+                <a href="http://newsfeedr.herokuapp.com" class="navbar-brand">Newsfeedr</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
