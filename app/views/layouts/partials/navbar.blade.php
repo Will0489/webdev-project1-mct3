@@ -1,22 +1,39 @@
  <header>
- 	<nav>
- 		<a href="/" class="logo left">Newsfeedr</a>
- 		<ul class="left">
- 		@if(Auth::check())
- 			<li><a href="/submit">Submit</a></li>
- 		@else
- 		    <li><a href="/login">Submit</a></li>
- 		@endif
- 		</ul>
- 		<ul>
-	 		@if(Auth::check())
-                <li><a href="/profile" alt="your profile"><img src="{{ Auth::user()->photo}}" class="icon avatar"/>{{ Auth::user()->username }}</a></li>
-                <li><a href="/logout"  alt="sign out">Log out</a></li>
-	 		@else
-                <li><a href="/login" alt="login">Log in</a></li>
-                <li><a href="/register" alt="register">Register</a></li>
- 			@endif
- 		</ul>
+ 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+ 	    <div class="container">
+ 	        <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="/" class="navbar-brand">Newsfeedr</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/news">Latest</a></li>
+                    <li><a href="/top-voted">Top voted</a></li>
+                @if(Auth::check())
+                    <li><a href="/submit">Submit</a></li>
+                @endif
+                @if(Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/profile" alt="your profile">Profile</a></li>
+                            <li><a href="/upvotes" alt="your upvotes">Upvotes</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"  alt="sign out">Log out</a></li>
+                        </ul>
+                @else
+                    <li><a href="/login" alt="login">Log in</a></li>
+                    <li><a href="/register" alt="register">Register</a></li>
+                @endif
+                </ul>
+            </div>
+        </div>
  	</nav>
  	
  	@if(Session::has('flash_notice'))

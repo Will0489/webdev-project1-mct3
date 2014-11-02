@@ -3,41 +3,56 @@
 @section('content')
 <div>
     <div>
-        {{ Form::open(['route' => 'user.store', 'method' => 'post', 'files' => true]) }}
-        <h1>Sign Up</h1>
-            <div>
-                {{ Form::text('username', null, ['placeholder' => 'Username', 'class' => 'input', 'required' => 'required']) }}
+        {{ Form::open(['route' => 'user.store', 'method' => 'post', 'files' => true, 'class' => 'form-inline']) }}
+        <h3>Sign Up</h3>
+            <div class="input-group">
+                {{ Form::text('username', null, ['placeholder' => 'Username', 'class' => 'form-control', 'required' => 'required']) }}
             </div>
-            <div>
-                {{ Form::text('email', null, ['placeholder' => 'Email address', 'class' => 'input', 'required' => 'required']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::text('email', null, ['placeholder' => 'Email address', 'class' => 'form-control', 'required' => 'required']) }}
             </div>
-            <div>
-                {{ Form::password('password', ['placeholder' => 'Password', 'class' => 'input', 'required' => 'required']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control', 'required' => 'required']) }}
             </div>
-            <div>
-                {{ Form::file('photo', null, ['placeholder' => 'Your profile picture', 'class' => 'input', 'required' => 'required']) }}
+            <br><br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">Profile picture&hellip;
+                        {{ Form::file('photo', null, ['placeholder' => 'Your profile picture', 'class' => 'form-control', 'required' => 'required']) }}
+                    </span>
+                </span>
+                {{ Form::text('photo_feedback', null, ['class' => 'form-control']) }}
+
             </div>
-            <div>
-                {{ Form::textarea('about', null, ['placeholder' => 'Tell us about yourself', 'class' => 'input']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::textarea('about', null, ['placeholder' => 'Tell us about yourself', 'class' => 'form-control']) }}
             </div>
-            <div>
-                {{ Form::text('location', null, ['placeholder' => 'Location', 'class' => 'input']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::text('location', null, ['placeholder' => 'Location', 'class' => 'form-control']) }}
             </div>
-            <div>
-                {{ Form::text('facebook', null, ['placeholder' => 'Facebook', 'class' => 'input']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::text('facebook', null, ['placeholder' => 'Facebook', 'class' => 'form-control']) }}
             </div>
-            <div>
-                {{ Form::text('twitter', null, ['placeholder' => 'Twitter', 'class' => 'input']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::text('twitter', null, ['placeholder' => 'Twitter', 'class' => 'form-control']) }}
             </div>
-            <div>
-                {{ Form::submit('Register', ['class' => 'btn red xxl']) }}
+            <br><br>
+            <div class="input-group">
+                {{ Form::submit('Register', ['class' => 'btn btn-default']) }}
             </div>
-            <div>
-                @if($errors->any())
-                <p class='xs'>{{$errors}}</p>
-                @endif
-            </div>
-            <p class='xs'>Already have an account? <a href="login" class="link">Log in</a></p>
+            @if($errors->any())
+                <br>
+                <div class="alert alert-danger">
+                    <strong>Oops!</strong> {{$errors->first()}}
+                </div>
+            @endif
+            <br><br><p class='xs'>Already have an account? <a href="login" class="link">Log in</a></p>
         {{ Form::close() }}
     </div>
 </div>

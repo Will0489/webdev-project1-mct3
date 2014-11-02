@@ -1,14 +1,19 @@
 @extends('layouts.default')
 
 @section('content')
-    <h1>Recent news</h1>
-    <ul>
+    <h3>Recent news</h3>
+    <table class="table table-striped">
+        <tbody>
         @foreach($posts as $post)
-            <li>
-                {{ link_to("news/$post->id", $post->title) }}
-                posted by {{ link_to("profile/{$post->user->id}", $post->user->username) }}
-                upvotes {{ $post->upvotes }}
-            </li>
+            <tr>
+                <td>{{ link_to($post->url, $post->title) }}</td>
+                <td>submitted by {{ link_to("profile/{$post->user->id}", $post->user->username) }}</td>
+                <td>{{ $post->created_at->format('d-M-Y') }}</td>
+                <td>upvotes {{ $post->upvotes }}</td>
+                <td>{{ link_to("news/$post->id", "Discuss") }}</td>
+                <td>{{ link_to("upvote", "Upvote") }}</td>
+            </tr>
         @endforeach
-    </ul>
+        </tbody>
+    </table>
 @stop

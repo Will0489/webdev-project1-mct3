@@ -9,6 +9,13 @@ class PostController extends \BaseController {
         return View::make('posts.index', compact('posts'));
 	}
 
+    public function top()
+    {
+        $posts = Post::orderBy('upvotes', 'desc')->get();
+
+        return View::make('posts.top', compact('posts'));
+    }
+
 	public function create()
 	{
 		return View::make('posts.submit');

@@ -4,7 +4,7 @@ class Upvote extends \Eloquent {
 
 	protected $fillable = ['post_id', 'upvoted_by'];
 
-    public function hasVoted($user, $post)
+    public function hasNotVoted($user, $post)
     {
         $upvotes = Vote::where('post_id', '=', $post)->where('upvoted_by', '=', $user)->first();
 

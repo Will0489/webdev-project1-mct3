@@ -14,7 +14,7 @@ class CommentController extends \BaseController {
 
         if($validator->fails())
         {
-            return Redirect::back()->withInput()->withErrors($validator);
+            return Redirect::to(URL::previous() . '#comment')->withInput()->withErrors($validator);
         }
         else
         {

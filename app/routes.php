@@ -15,6 +15,8 @@ Route::get('register', 'UserController@create');
 Route::post('register', 'UserController@store');
 Route::get('profile', 'UserController@profile');
 Route::get('profile/{id?}', 'UserController@show');
+Route::get('top-voted', 'PostController@top');
+Route::get('upvotes', 'UpvoteController@index');
 Route::get('news', 'PostController@index');
 Route::get('news/{id?}', 'PostController@show');
 Route::get('comments', 'CommentController@index');
@@ -31,8 +33,8 @@ Route::get('login/fb', function() {
     return Redirect::away($facebook->getLoginUrl($params));
 });
 
-/*
-// Display FB user info as object
+/* Display FB user info as object for debugging purposes
+
 Route::get('login/fb/callback', function() {
     $code = Input::get('code');
     if (strlen($code) == 0) return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');

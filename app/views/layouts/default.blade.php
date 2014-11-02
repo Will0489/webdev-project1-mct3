@@ -4,11 +4,11 @@
 		@include('layouts.partials.head')
 	</head>
 
-	<body>
+	<body role="document" cz-shortcut-listen="true">
 		@include('layouts.partials.navbar')
-			
+        <div class="container theme-showcase" role="main">
 		@yield('content')
-		
+		</div>
 		<div class="clearfix"></div>
 		 
 		@include('layouts.partials.footer')

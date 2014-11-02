@@ -2,6 +2,18 @@
 
 class UpvoteController extends \BaseController {
 
+    public function index()
+    {
+        $posts = Post::with(array('upvote' => function(query)
+        {
+            $query->where()
+        }))->get();
+        //$posts = Post::orderBy('created_at', 'desc')->get();
+
+        return View::make('posts.index', compact('posts'));
+        return View::make('users.upvotes', compact('posts'));
+    }
+
 	public function store()
 	{
 		$upvote = new Vote;
@@ -9,9 +21,9 @@ class UpvoteController extends \BaseController {
         $user = Auth::id();
         $post = $data['post_id'];
 
-        $hasVoted = $upvote->hasVoted($user, $post);
+        $hasNotVoted = $upvote->hasNotVoted($user, $post);
 
-        if($hasVoted)
+        if($hasNotVoted)
         {
             $upvote->create([
                 'post_id' => $post,
