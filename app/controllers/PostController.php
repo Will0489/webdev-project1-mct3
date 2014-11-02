@@ -4,14 +4,14 @@ class PostController extends \BaseController {
 
 	public function index()
 	{
-		$posts = Post::orderBy('created_at', 'desc')->get();
+		$posts = Post::orderBy('created_at', 'desc')->with('votes')->get();
 
         return View::make('posts.index', compact('posts'));
 	}
 
     public function top()
     {
-        $posts = Post::orderBy('upvotes', 'desc')->get();
+        $posts = Post::orderBy('upvotes', 'desc')->with('votes')->get();
 
         return View::make('posts.top', compact('posts'));
     }

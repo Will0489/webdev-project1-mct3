@@ -4,19 +4,17 @@ class UpvoteController extends \BaseController {
 
     public function index()
     {
-        $posts = Post::with(array('upvote' => function(query)
+        $posts = Post::whereHas('votes', function($q)
         {
-            $query->where()
-        }))->get();
-        //$posts = Post::orderBy('created_at', 'desc')->get();
+           $q->where('upvoted_by', '=', Auth::id());
+        });
 
-        return View::make('posts.index', compact('posts'));
         return View::make('users.upvotes', compact('posts'));
     }
 
 	public function store()
 	{
-		$upvote = new Vote;
+		$upvote = new Upvote;
         $data = Input::all();
         $user = Auth::id();
         $post = $data['post_id'];
@@ -29,6 +27,10 @@ class UpvoteController extends \BaseController {
                 'post_id' => $post,
                 'upvoted_by' => $user
             ]);
+            $upvoted_post = Post::find($post);
+            $upvoted_post['upvotes'] += 1;
+
+            $upvoted_post->save();
         }
         return Redirect::back();
 	}

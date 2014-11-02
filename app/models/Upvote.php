@@ -6,12 +6,11 @@ class Upvote extends \Eloquent {
 
     public function hasNotVoted($user, $post)
     {
-        $upvotes = Vote::where('post_id', '=', $post)->where('upvoted_by', '=', $user)->first();
+        $upvotes = Upvote::where('post_id', '=', $post)->where('upvoted_by', '=', $user)->first();
 
         if($upvotes===NULL)
         {
-            $newpost = new Post;
-            return $newpost->upvote($post);
+            return true;
         }
         else
         {

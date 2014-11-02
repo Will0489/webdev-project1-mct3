@@ -17,6 +17,7 @@ Route::get('profile', 'UserController@profile');
 Route::get('profile/{id?}', 'UserController@show');
 Route::get('top-voted', 'PostController@top');
 Route::get('upvotes', 'UpvoteController@index');
+Route::post('upvote', 'UpvoteController@store');
 Route::get('news', 'PostController@index');
 Route::get('news/{id?}', 'PostController@show');
 Route::get('comments', 'CommentController@index');

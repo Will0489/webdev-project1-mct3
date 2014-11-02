@@ -5,14 +5,14 @@ class Post extends \Eloquent {
 	protected $fillable = ['title', 'url', 'posted_by'];
     protected $guarded = ['id'];
 
-    public function upvote($id)
+    /*public function upvote($id)
     {
         $post = Post::find($id);
         $upvote = $post->upvotes;
         $upvote += 1;
 
-        return $post->update(array('upvotes' => $upvote));
-    }
+        return $post->update(array('upvotes' => $upvote)); OBSOLETE
+    }*/
 
     public function user()
     {
@@ -24,7 +24,7 @@ class Post extends \Eloquent {
         return $this->hasMany('Comment');
     }
 
-    public function upvotes()
+    public function votes()
     {
         return $this->hasMany('Upvote');
     }

@@ -25,7 +25,7 @@
             {{ Form::open(['route' => 'comment.store', 'method' => 'post']) }}
             <h4><a name="comment"></a>Add a comment</h4>
                 <div>
-                    {{ Form::textarea('body', null, ['placeholder' => 'Your comment', 'class' => 'input']) }}
+                    {{ Form::textarea('body', null, ['placeholder' => 'Your comment', 'class' => 'input', 'required' => 'required']) }}
                 </div>
                 <div>
                     {{ Form::submit('Add comment', ['class' => 'btn btn-sm btn-default']) }}
