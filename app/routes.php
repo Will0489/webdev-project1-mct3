@@ -81,5 +81,5 @@ Route::get('login/fb/callback', function() {
 
     Auth::login($user);
 
-    return Redirect::to('/')->with('message', 'Logged in with Facebook. ');
+    return Redirect::to('/profile')->with('message', 'Logged in with Facebook. ');
 });

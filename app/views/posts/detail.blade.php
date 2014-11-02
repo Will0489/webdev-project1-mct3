@@ -15,6 +15,9 @@
                 {{ Form::submit('Add comment') }}
             </div>
             <div>
+                {{ Form::hidden('post_id', $post['post_id']) }}
+            </div>
+            <div>
                 @if($errors->any())
                 <p class='xs'>{{$errors}}</p>
                 @endif

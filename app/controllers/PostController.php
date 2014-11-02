@@ -38,7 +38,7 @@ class PostController extends \BaseController {
                 'posted_by' => $user
             ]);
         }
-        return Redirect::route('/news');
+        return Redirect::to('/news');
 
     }
 

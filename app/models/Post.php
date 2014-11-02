@@ -2,7 +2,7 @@
 
 class Post extends \Eloquent {
 
-	protected $fillable = ['title', 'url'];
+	protected $fillable = ['title', 'url', 'posted_by'];
     protected $guarded = ['id'];
 
     public function upvote($id)
