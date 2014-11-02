@@ -1,7 +1,7 @@
 <?php
 
 class Comment extends \Eloquent {
-	protected $fillable = ['body'];
+	protected $fillable = ['body', 'comment_by', 'post_id'];
 
     public function user()
     {

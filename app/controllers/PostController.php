@@ -44,10 +44,8 @@ class PostController extends \BaseController {
 
 	public function show($id)
 	{
-        $post = Post::with('user')->findOrFail($id);
-        $user = User::with('posts');
-        $upvote = Upvote::with('posts');
+        $post = Post::with('user', 'comments')->findOrFail($id);
 
-        return View::make('posts.detail', compact('post', 'user', 'upvote'));
+        return View::make('posts.detail', compact('post'));
 	}
 }
