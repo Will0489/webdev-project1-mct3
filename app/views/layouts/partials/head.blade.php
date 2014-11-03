@@ -5,5 +5,5 @@
 	<meta name="author" content="William Blommaert">
 	<link rel="icon" href="../../favicon.ico">
 	<title>@yield('meta-title', 'Newsfeedr')</title>
-	{{ HTML::style('assets/stylesheets/application.css', array(), true) }}
+	{{ HTML::style('assets/stylesheets/application.css') }}
 

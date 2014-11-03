@@ -2,6 +2,7 @@
 
 @section('content')
     <h3>Recent posts</h3>
+    <p>If all formatting and styles are missing, try refreshing <a href="http://newsfeedr.herokuapp.com">here</a></p>
     {{ $nonews = null }}
     <table class="table table-striped">
         <tbody>
