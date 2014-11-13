@@ -19,12 +19,12 @@ class SessionController extends \BaseController {
 
 	public function store()
 	{
-		if (Auth::attempt(Input::only('username', 'password')))
+		if (Auth::attempt(Input::only('email', 'password')))
         {
             return Redirect::to('/profile');
         }
 
-        return Redirect::back()->withInput()->withErrors(['Invalid username/password.']);
+        return Redirect::back()->withInput()->withErrors(['Invalid e-mail/password.']);
     }
 
 	public function destroy()

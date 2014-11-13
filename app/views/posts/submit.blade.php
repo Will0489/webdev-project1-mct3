@@ -4,7 +4,7 @@
 <div>
     <div>
         {{ Form::open(['route' => 'post.store', 'method' => 'post', 'class' => 'form-inline']) }}
-        <h3>Submit a post</h3>
+            <h3>Submit a post</h3>
             <div>
                 {{ Form::text('title', null, ['placeholder' => 'Title', 'class' => 'form-control', 'required' => 'required']) }}
             </div>

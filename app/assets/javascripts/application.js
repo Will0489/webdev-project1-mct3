@@ -19,3 +19,9 @@ $(document).ready( function() {
 
     });
 });
+
+$(document).on('click', "input[type='submit']", function() {
+    console.log('Disabled submit button!');
+    $(this).attr('disabled', 'disabled');
+    $(this).parents('form').submit();
+});

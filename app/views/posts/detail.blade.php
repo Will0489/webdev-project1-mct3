@@ -4,12 +4,12 @@
 <div>
     <div>
         <h3>{{ $post->title }}</h3>
-        Article source: <a href="{{ $post->url }}">{{ $post->title }}</a><br><br>
+        Article source: <a href="{{ $post->url }}">{{{ $post->title }}}</a><br><br>
     </div>
     <section class="comments">
         @foreach($post->comments as $comment)
             <div class="well">
-                {{ $comment->body }}
+                {{{ $comment->body }}}
             </div>
             by {{ link_to("profile/{$comment->user->id}", $comment->user->username) }} on
             @if($comment->created_at == new DateTime('today') )

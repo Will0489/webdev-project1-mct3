@@ -2,6 +2,7 @@
 
 @section('content')
     <h3>Top voted posts</h3>
+    @if(!$posts->isEmpty())
     <table class="table table-striped">
         <tbody>
         @foreach($posts as $post)
@@ -29,4 +30,7 @@
         @endforeach
         </tbody>
     </table>
+    @else
+        <p>No posts have been upvoted yet.</p>
+    @endif
 @stop

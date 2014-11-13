@@ -1,10 +1,19 @@
 <?php
 
+use Carbon\Carbon;
+
 class PostController extends \BaseController {
 
 	public function index()
 	{
-		$posts = Post::orderBy('created_at', 'desc')->with('votes')->get();
+        $today = array(
+            Carbon::now()->setTime(00,00,00),
+            Carbon::now()->setTime(23,59,59)
+        );
+		$posts = Post::orderBy('created_at', 'desc')->whereBetween('created_at', $today)->with(array('votes' => function($query)
+        {
+            $query->where('upvoted_by', '=', Auth::id());
+        }))->get();
 
         return View::make('posts.index', compact('posts'));
 	}
@@ -26,10 +35,14 @@ class PostController extends \BaseController {
         $data = Input::all();
         $user = Auth::id();
 
-        $rules = ['title' => 'required', 'url' => 'required'];
+        $rules = [
+            'title' => 'required',
+            'url' => 'required'
+        ];
         $feedback = [
             'title.required' => 'You need to enter a title.',
-            'url.required' => 'You need to enter a url.'];
+            'url.required' => 'You need to enter a url.'
+        ];
 
         $validator = Validator::make(Input::all(), $rules, $feedback);
 

@@ -4,10 +4,10 @@ class UpvoteController extends \BaseController {
 
     public function index()
     {
-        $posts = Post::whereHas('votes', function($q)
+        $posts = Post::orderBy('created_at')->with(array('votes' => function($q)
         {
            $q->where('upvoted_by', '=', Auth::id());
-        });
+        }))->get();
 
         return View::make('users.upvotes', compact('posts'));
     }
